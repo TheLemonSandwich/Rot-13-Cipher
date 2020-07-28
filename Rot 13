@@ -1,0 +1,42 @@
+#include <string>
+#include<iostream>
+using namespace std;
+
+string rot13(string msg)
+{
+	const int size = msg.length();
+	for (int i = 0; i < size; i++)
+	{
+		int ascii;
+		ascii = int(msg.at(i));
+		if (ascii <= int('Z') && ascii >= int('A'))
+		{
+			if (ascii + 13 > int('Z'))
+			{
+				ascii = int('Z') - ascii;
+				ascii = 77 - ascii;
+			}
+			else
+				ascii += 13;
+		}
+		else if (ascii <= int('z') && ascii >= int('a'))
+		{
+			if (ascii + 13 > int('z')) {
+				ascii = int('z') - ascii;
+				ascii = 109 - ascii;
+			}
+			else
+				ascii += 13;
+		}
+
+		msg.at(i) = char(ascii);
+	}
+	return msg;
+}
+int main()
+{
+	cout << "Enter string to generate Rot13 Cipher: ";
+	string m;
+	getline(cin, m);
+	cout << rot13(m);
+}
